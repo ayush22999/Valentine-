@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Valentine ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
+    overflow-x: hidden;
+}
+
+/* Container */
+.container {
+    max-width: 420px;
+    margin: auto;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Cards */
+.card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    text-align: center;
+    animation: fadeIn 1s ease;
+}
+
+h1, h2 {
+    color: #e91e63;
+}
+
+p {
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.emoji {
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+/* Typing text */
+#typing {
+    min-height: 80px;
+    font-style: italic;
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 25px;
+    border-radius: 30px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.yes {
+    background: #e91e63;
+    color: white;
+}
+
+.no {
+    background: #ccc;
+}
+
+/* Gallery */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.gallery img {
+    width: 100%;
+    border-radius: 15px;
+}
+
+/* Countdown */
+#countdown {
+    font-size: 18px;
+    font-weight: bold;
+    color: #e91e63;
+}
+
+/* Floating Hearts */
+.heart {
+    position: fixed;
+    color: rgba(255,0,85,0.7);
+    font-size: 20px;
+    animation: float 6s linear infinite;
+    z-index: 1;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.footer {
+    text-align: center;
+    font-size: 13px;
+    color: white;
+    margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background Music -->
+<audio autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2023/03/02/audio_6b0c6a6f0d.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+    <!-- Intro -->
+    <div class="card">
+        <h1>Hey <span id="name"></span> ❤️</h1>
+        <p id="typing"></p>
+    </div>
+
+    <!-- Countdown -->
+    <div class="card">
+        <div class="emoji">⏳</div>
+        <h2>Countdown to Valentine’s Day</h2>
+        <p id="countdown"></p>
+    </div>
+
+    <!-- Rose Day -->
+    <div class="card">
+        <div class="emoji">🌹</div>
+        <h2>Rose Day</h2>
+        <p>
+            If feelings had a color,  
+            they’d bloom like roses  
+            every time I think of you.
+        </p>
+    </div>
+
+    <!-- Photo Gallery -->
+    <div class="card">
+        <div class="emoji">📸</div>
+        <h2>Us 💕</h2>
+        <div class="gallery">
+            <!-- CHANGE IMAGE LINKS -->
+            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330">
+            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1">
+        </div>
+    </div>
+
+    <!-- Proposal -->
+    <div class="card">
+        <div class="emoji">💍</div>
+        <h2>Will You Be My Valentine?</h2>
+        <button class="btn yes" onclick="yesClick()">YES 💖</button>
+        <button class="btn no" onmouseover="moveNo()">NO 🙈</button>
+    </div>
+
+    <div class="footer">
+        Made with ❤️ only for you
+    </div>
+
+</div>
+
+<script>
+/* EDIT HER NAME */
+const girlName = "My Love";
+document.getElementById("name").innerText = girlName;
+
+/* Typing Effect */
+const text = `From the moment you came into my life,
+everything felt softer… warmer… real.
+This little website is my way of saying
+you matter to me more than words ever could.`;
+let index = 0;
+function typeEffect() {
+    if (index < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeEffect, 40);
+    }
+}
+typeEffect();
+
+/* Countdown */
+const valentine = new Date("February 14, 2026 00:00:00").getTime();
+setInterval(() => {
+    const now = new Date().getTime();
+    const diff = valentine - now;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    document.getElementById("countdown").innerText =
+        days > 0 ? `${days} days left ❤️` : "Happy Valentine’s Day 💖";
+}, 1000);
+
+/* Proposal Buttons */
+function yesClick() {
+    alert("You just made me the happiest person alive ❤️");
+}
+
+function moveNo() {
+    const btn = event.target;
+    btn.style.position = "absolute";
+    btn.style.left = Math.random() * 80 + "%";
+    btn.style.top = Math.random() * 80 + "%";
+}
+
+/* Floating Hearts */
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}, 400);
+</script>
+
+</body>
+</html>
